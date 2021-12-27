@@ -19,6 +19,7 @@ class HomeRepository @Inject constructor(
     val db = FirebaseFirestore.getInstance()
     suspend fun getPostsFromFirestore(name: String): DataOrException<List<Post>, Exception> {
         val dataOrException = DataOrException<List<Post>, Exception>()
+
         try {
             dataOrException.data = queryProductsByName.get().await().map { document ->
                 var post = document.toObject(Post::class.java)
@@ -33,6 +34,7 @@ class HomeRepository @Inject constructor(
                         post.isLiked = true
                     }
                 }
+                post.id = document.id
                 post.comments = comments
                 post
             }

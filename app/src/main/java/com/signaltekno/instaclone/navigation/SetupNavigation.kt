@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.signaltekno.instaclone.Screen.AuthScreen
 import com.signaltekno.instaclone.Screen.HomeScreen
+import com.signaltekno.instaclone.Screen.ProfileScreen
 import com.signaltekno.instaclone.Screen.SplashScreen
 import com.signaltekno.instaclone.viewmodel.SignInViewModel
 
@@ -27,7 +28,12 @@ fun SetupNavigation(
             HomeScreen(signInViewModel, homeViewModel = hiltViewModel(), navHostController = navController, setBottomBar = setBottomBar)
         }
         composable(Screen.Profile.route){
-
+            ProfileScreen(
+                signInViewModel = signInViewModel,
+                navHostController = navController,
+                homeViewModel = hiltViewModel(),
+                setBottomBar =setBottomBar
+            )
         }
     }
 }

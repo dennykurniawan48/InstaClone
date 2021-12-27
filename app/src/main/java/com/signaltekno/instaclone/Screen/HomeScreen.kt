@@ -67,8 +67,6 @@ fun HomeScreen(signInViewModel: SignInViewModel, navHostController: NavHostContr
     data.data?.let {
         LazyColumn{
             items(it){ item ->
-                Log.d("ddd data", item.toString())
-                Log.d("ddd comment", item.comments.toString())
                 Card(modifier = Modifier
                     .fillMaxWidth()
                     .padding(6.dp), elevation = 10.dp, shape = RoundedCornerShape(15.dp)) {
@@ -97,7 +95,10 @@ fun HomeScreen(signInViewModel: SignInViewModel, navHostController: NavHostContr
                         Row(modifier=Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
                             Row() {
                                 IconButton(onClick = {
-
+                                    Log.d("id", item.id.toString())
+                                    item.id?.let {
+                                        homeViewModel.setLikes(it)
+                                    }
                                 }) {
                                     Icon(imageVector = if(item.isLiked) Icons.Default.Favorite else Icons.Default.FavoriteBorder, contentDescription = "Fav", tint = if(item.isLiked) Color.Red else Color.Black)
                                 }
